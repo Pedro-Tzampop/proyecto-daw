@@ -1,23 +1,38 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import './Item.scss'
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteGoal } from '../../Reducers/goalsSlice';
 
-function Item() {
+function Item(props) {
+  const dispatch = useDispatch();
+
+  const handleRemove = () => {
+    dispatch(deleteGoal(props.id));
+  };
+
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Body>
         <Card.Text className='fw-bold'>
           Name
         </Card.Text>
-        <Card.Text>Realizar proyecto</Card.Text>
+        <Card.Text>{props.name}</Card.Text>
         <Card.Text className='fw-bold'>
           Description
         </Card.Text>
         <Card.Text>
-          Elaborar proyecto del curso de DAW.
+          {props.description}
+        </Card.Text>
+        <Card.Text className='fw-bold'>
+          Due Date
+        </Card.Text>
+        <Card.Text>
+          {props.dueDate}
         </Card.Text>
         <Button variant="info">Edit</Button>
-        <Button variant="info">Remove</Button>
+        <Button variant="info" onClick={handleRemove}>Remove</Button>
       </Card.Body>
     </Card>
   );
