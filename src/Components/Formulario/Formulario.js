@@ -16,21 +16,21 @@ function Formulario() {
   const inputRefName = useRef();
   const inputRefDescription = useRef();
   const inputRefDueDate = useRef();
-  const selectedOption = useSelector(state => state.option.selectedOption);
+  const selectedOption = useSelector(state => state.option.value);
   const dispatch = useDispatch();
 
   const [buttonText, setButtonText] = useState('Add Goal');
 
   const addItem = (type) => { 
-    if (type === 'goal') {
+    if (type === 'goals') {
       dispatch(addGoal({ 'name': inputRefName.current.value, 'description': inputRefDescription.current.value, 'dueDate': inputRefDueDate.current.value }));
-    } else if (type === 'task') {
+    } else if (type === 'tasks') {
       dispatch(addTask({ 'name': inputRefName.current.value, 'description': inputRefDescription.current.value, 'dueDate': inputRefDueDate.current.value }));
     }
   };
   
   const handleButtonClick = (e) => {
-    e.preventDefault();
+    
     addItem(selectedOption);
   };
   

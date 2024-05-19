@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import goalReducer from "./Reducers/goalsSlice"
-import optionReducer from "./Reducers/opitonSlice"
+import optionReducer from "./Reducers/optionSlice"
 import taskReducer from "./Reducers/tasksSlice"
+import optionSlice from "./Reducers/optionSlice";
 
 export default configureStore({
     reducer: {
@@ -9,4 +10,4 @@ export default configureStore({
         option:optionReducer,
         tasks: taskReducer
     }
-})
+});

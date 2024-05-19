@@ -3,11 +3,10 @@ import { createSlice } from "@reduxjs/toolkit"
 export const optionSlice = createSlice({
     name:'option',
     initialState: {
-        value:
-            'goals'
+            value: 'goals'
     },
     reducers: {
-        changeOption: (state,action) => {
+        changeOption: (state, action) => {
             state.value = action.payload;
         }
     }

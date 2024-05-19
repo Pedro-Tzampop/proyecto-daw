@@ -2,16 +2,16 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { changeOption } from '../../Reducers/opitonSlice';
+import { changeOption } from '../../Reducers/optionSlice';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
 function Menu() {
   const dispatch = useDispatch();
 
-  const changeOptionFunc = (option)=>{
+  const changeOptionFunc = (option) => {
     dispatch(changeOption(option));
-  }
+  };
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">

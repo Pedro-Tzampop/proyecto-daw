@@ -1,36 +1,33 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import './Item.scss'
+import './Item.scss';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteGoal } from '../../Reducers/goalsSlice';
+import { deleteTask } from '../../Reducers/tasksSlice';
+import { useSelector } from 'react-redux';
 
 function Item(props) {
   const dispatch = useDispatch();
+  const selectedOption = useSelector(state => state.option.value);
 
   const handleRemove = () => {
-    dispatch(deleteGoal(props.id));
+    if (selectedOption === 'goals') {
+      dispatch(deleteGoal(props.id));
+    } else if (selectedOption === 'tasks') {
+      dispatch(deleteTask(props.id));
+    }
   };
 
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Body>
-        <Card.Text className='fw-bold'>
-          Name
-        </Card.Text>
+        <Card.Text className='fw-bold'>Name</Card.Text>
         <Card.Text>{props.name}</Card.Text>
-        <Card.Text className='fw-bold'>
-          Description
-        </Card.Text>
-        <Card.Text>
-          {props.description}
-        </Card.Text>
-        <Card.Text className='fw-bold'>
-          Due Date
-        </Card.Text>
-        <Card.Text>
-          {props.dueDate}
-        </Card.Text>
+        <Card.Text className='fw-bold'>Description</Card.Text>
+        <Card.Text>{props.description}</Card.Text>
+        <Card.Text className='fw-bold'>Due Date</Card.Text>
+        <Card.Text>{props.dueDate}</Card.Text>
         <Button variant="info">Edit</Button>
         <Button variant="info" onClick={handleRemove}>Remove</Button>
       </Card.Body>
@@ -39,3 +36,4 @@ function Item(props) {
 }
 
 export default Item;
+
