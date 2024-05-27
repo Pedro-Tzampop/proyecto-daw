@@ -7,12 +7,62 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import AddingMobileButton from './Components/AddingMobileButton/AddingMobileButton';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import {
+  initAddTask
+}from '../src/Reducers/tasksSlice.js';
+import {
+  InitAddGoal
+}from '../src/Reducers/goalsSlice.js'
 
 function App() {
   const goals = useSelector((state) => state.goals.value);
   const tasks = useSelector((state) => state.tasks.value);
   const selectedOption = useSelector((state) => state.option.value);
+  const dispatch = useDispatch();
+
+  function initFetch(){
+    fetch("http://localhost:3001/tasks/getTasks",{
+      method:"GET",
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization":"actividad3DAW"
+      }
+    }).then((response)=>{
+      response.json();
+    }).then((response)=>{
+        response.map((task)=>{
+          dispatch(initAddTask(task));
+        })
+    }).catch(err=>{
+      console.log(err);
+    })
+  }
+  useEffect(()=>{
+    initFetch();
+  },[])
+
+  function initFetchGoals(){
+    fetch("http://localhost:3001/goals/getGoals",{
+      method:"GET",
+      headers:{
+        "Content-Type":"application/json",
+        "Authorization":"actividad3DAW"
+      }
+    }).then((response)=>{
+      response.json();
+    }).then((response)=>{
+        response.map((goal)=>{
+          dispatch(initAddTask(goal));
+        })
+    }).catch(err=>{
+      console.log(err);
+    })
+  }
+  useEffect(()=>{
+    initFetchGoals();
+  },[])
 
   return (
     <div className="App">
