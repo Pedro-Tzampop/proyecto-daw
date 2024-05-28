@@ -54,7 +54,7 @@ function App() {
       response.json();
     }).then((response)=>{
         response.map((goal)=>{
-          dispatch(initAddTask(goal));
+          dispatch(InitAddGoal(goal));
         })
     }).catch(err=>{
       console.log(err);
